@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ROA 헌금으로 동참하기</title>
+  <link rel="icon" type="image/png" href="roa-logo.png">
+  <style>
+    :root {
+      --primary: #001f3f;
+      --accent: #28a745;
+      --bg: #f7f8fa;
+      --card-bg: #fff;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: var(--card-bg);
+      width: 90%;
+      max-width: 420px;
+      padding: 26px 22px 34px;
+      border-radius: 20px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+    .logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-size: 1.5em;
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    p {
+      color: #555;
+      font-size: 0.95em;
+      margin: 8px 0 18px;
+      line-height: 1.5em;
+    }
+    .info {
+      text-align: left;
+      background: #f1f3f5;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      font-size: 0.95em;
+      line-height: 1.8em;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 6px 0;
+    }
+    .label {
+      color: #555;
+      font-weight: 500;
+    }
+    .value {
+      color: #111;
+      font-weight: 600;
+    }
+    button.copy-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.85em;
+      cursor: pointer;
+    }
+    button.copy-btn:hover {
+      background: #003366;
+    }
+    .small {
+      font-size: 0.85em;
+      color: #777;
+      margin-top: 18px;
+      line-height: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="roa-logo.png" class="logo" alt="ROA Logo" />
+    <h1>헌금으로 동참하기</h1>
+    <p>ROA (Revival of Acts29)<br>열방을 위한 찬양 🎵</p>
+    <p><strong>2025년 11월 1일 (토) 오후 5시</strong></p>
+
+    <div class="info">
+      <div class="row">
+        <span class="label">은행 계좌번호</span>
+        <button class="copy-btn" onclick="copyText('account')">복사</button>
+      </div>
+      <div id="account" class="value">12-3456-7890123-00</div>
+
+      <div class="row">
+        <span class="label">계좌명</span>
+        <button class="copy-btn" onclick="copyText('name')">복사</button>
+      </div>
+      <div id="name" class="value">Onnuri Worship Night</div>
+
+      <div class="row">
+        <span class="label">Reference</span>
+        <button class="copy-btn" onclick="copyText('ref')">복사</button>
+      </div>
+      <div id="ref" class="value">ROA-2025</div>
+    </div>
+
+    <p class="small">
+      이날의 모든 헌금은 온누리교회의 선교를 위해 사용됩니다.  
+      <br><br>감사합니다 🙏
+    </p>
+  </div>
+
+  <script>
+    function copyText(id) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text);
+      alert(`"${text}" 복사되었습니다 ✅`);
+    }
+  </script>
+</body>
+</html>
