@@ -1,134 +1,249 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ROA 헌금으로 동참하기</title>
-  <link rel="icon" type="image/png" href="roa-logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OWN (Onnuri Worship Night)</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='%230a2463' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2v20M5 7h14'/%3E%3C/svg%3E">
   <style>
     :root {
-      --primary: #001f3f;
-      --accent: #28a745;
-      --bg: #f7f8fa;
-      --card-bg: #fff;
+      --navy: #0a2463;
+      --text-dark: #222;
+      --text-light: #555;
+      --border: #e5e5e5;
+      --bg-gradient: linear-gradient(180deg, #f8faff 0%, #ffffff 100%);
+      --shadow: rgba(10,36,99,0.12);
     }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       margin: 0;
-      background: var(--bg);
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-gradient);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      overflow-x: hidden;
     }
+
+    .light-glow {
+      position: fixed;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(10,36,99,0.18) 0%, transparent 70%);
+      filter: blur(90px);
+      animation: floatGlow 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatGlow {
+      0%, 100% {transform: translateX(-50%) translateY(-10px);}
+      50% {transform: translateX(-50%) translateY(10px);}
+    }
+
     .card {
-      background: var(--card-bg);
       width: 90%;
-      max-width: 420px;
-      padding: 26px 22px 34px;
-      border-radius: 20px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      max-width: 480px;
+      background: white;
+      border-radius: 22px;
+      box-shadow: 0 6px 25px var(--shadow);
+      padding: 36px 26px;
       text-align: center;
+      position: relative;
+      animation: fadeIn 0.8s ease-out, breathing 6s ease-in-out infinite;
+      overflow: hidden;
     }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes breathing {
+      0%, 100% {box-shadow: 0 6px 25px var(--shadow);}
+      50% {box-shadow: 0 8px 30px rgba(10,36,99,0.25);}
+    }
+
     .logo {
-      width: 72px;
-      height: 72px;
-      border-radius: 16px;
-      margin-bottom: 10px;
+      width: 64px;
+      height: 64px;
+      margin-bottom: 14px;
+      animation: logoGlow 6s ease-in-out infinite;
     }
+
+    @keyframes logoGlow {
+      0%, 100% {filter: drop-shadow(0 0 0 rgba(10,36,99,0));}
+      50% {filter: drop-shadow(0 0 8px rgba(10,36,99,0.4));}
+    }
+
     h1 {
-      font-size: 1.5em;
-      color: var(--primary);
-      margin-bottom: 8px;
+      font-size: 1.6em;
+      margin: 0;
+      color: var(--navy);
       font-weight: 700;
     }
-    p {
-      color: #555;
-      font-size: 0.95em;
-      margin: 8px 0 18px;
-      line-height: 1.5em;
+
+    h2 {
+      font-size: 1em;
+      margin-top: 6px;
+      margin-bottom: 28px;
+      color: var(--text-light);
+      font-weight: 500;
     }
+
+    .section-title {
+      font-weight: 700;
+      font-size: 1.1em;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
     .info {
       text-align: left;
-      background: #f1f3f5;
+      background: #fafafa;
+      border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 14px 16px;
-      margin-bottom: 16px;
-      font-size: 0.95em;
-      line-height: 1.8em;
+      padding: 18px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(6px);
     }
-    .row {
+
+    .info-block {
+      margin-bottom: 16px;
+    }
+
+    .info-label {
+      font-size: 0.9em;
+      color: var(--text-light);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .info-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 6px 0;
+      flex-wrap: wrap;
     }
-    .label {
-      color: #555;
-      font-weight: 500;
-    }
+
     .value {
-      color: #111;
       font-weight: 600;
+      font-size: 0.95em;
+      color: var(--text-dark);
+      word-break: break-word;
+      flex: 1;
     }
-    button.copy-btn {
-      background: var(--primary);
+
+    .copy-btn {
+      margin-left: 10px;
+      font-size: 0.8em;
+      background: var(--navy);
       color: white;
       border: none;
-      padding: 4px 10px;
       border-radius: 6px;
-      font-size: 0.85em;
+      padding: 5px 10px;
       cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
     }
-    button.copy-btn:hover {
-      background: #003366;
+
+    .copy-btn:active {
+      transform: scale(0.93);
+      box-shadow: 0 0 10px rgba(10,36,99,0.3);
     }
-    .small {
-      font-size: 0.85em;
-      color: #777;
-      margin-top: 18px;
+
+    footer {
+      margin-top: 28px;
+      font-size: 0.9em;
+      color: var(--text-light);
       line-height: 1.5em;
+    }
+
+    .footer-title {
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .copied {
+      background: #14b866 !important;
+      color: white !important;
+      transform: scale(1.05);
+      box-shadow: 0 0 12px rgba(20,184,102,0.4);
     }
   </style>
 </head>
 <body>
+  <div class="light-glow"></div>
   <div class="card">
-    <img src="roa-logo.png" class="logo" alt="ROA Logo" />
-    <h1>헌금으로 동참하기</h1>
-    <p>ROA (Revival of Acts29)<br>열방을 위한 찬양 🎵</p>
-    <p><strong>2025년 11월 1일 (토) 오후 5시</strong></p>
-
-    <div class="info">
-      <div class="row">
-        <span class="label">은행 계좌번호</span>
-        <button class="copy-btn" onclick="copyText('account')">복사</button>
-      </div>
-      <div id="account" class="value">12-3456-7890123-00</div>
-
-      <div class="row">
-        <span class="label">계좌명</span>
-        <button class="copy-btn" onclick="copyText('name')">복사</button>
-      </div>
-      <div id="name" class="value">Onnuri Worship Night</div>
-
-      <div class="row">
-        <span class="label">Reference</span>
-        <button class="copy-btn" onclick="copyText('ref')">복사</button>
-      </div>
-      <div id="ref" class="value">ROA-2025</div>
+    <div class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#0a2463" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2v20M5 7h14"/>
+      </svg>
     </div>
 
-    <p class="small">
-      이날의 모든 헌금은 온누리교회의 선교를 위해 사용됩니다.  
-      <br><br>감사합니다 🙏
-    </p>
+    <h1>OWN (Onnuri Worship Night)</h1>
+    <h2>For the Nations</h2>
+
+    <div class="section-title">Donate via Bank Transfer / 계좌이체로 기부하기</div>
+
+    <div class="info">
+      <div class="info-block">
+        <span class="info-label">Payee (수취인)</span>
+        <div class="info-row">
+          <span class="value" id="payee">The Auckland Onnuri Church Charitable Tr</span>
+          <button class="copy-btn" onclick="copyField('payee', this)">Copy</button>
+        </div>
+      </div>
+      <div class="info-block">
+        <span class="info-label">Account (계좌)</span>
+        <div class="info-row">
+          <span class="value" id="account">06-0188-0168963-01</span>
+          <button class="copy-btn" onclick="copyField('account', this)">Copy</button>
+        </div>
+      </div>
+      <div class="info-block">
+        <span class="info-label">Particulars (거래내역)</span>
+        <div class="info-row">
+          <span class="value" id="particulars">WOA</span>
+          <button class="copy-btn" onclick="copyField('particulars', this)">Copy</button>
+        </div>
+      </div>
+      <div class="info-block">
+        <span class="info-label">Reference (참고)</span>
+        <div class="info-row">
+          <span class="value" id="reference">Donor name / 기부자명</span>
+          <button class="copy-btn" onclick="copyField('reference', this)">Copy</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-title">ROA (Revival of Acts29)</div>
+      <div>
+        All offerings from this night will be used for the mission of Onnuri Church.<br>
+        이날의 모든 헌금은 온누리교회의 선교를 위해 사용됩니다.
+      </div>
+    </footer>
   </div>
 
   <script>
-    function copyText(id) {
-      const text = document.getElementById(id).textContent;
+    function copyField(id, btn) {
+      const text = document.getElementById(id).textContent.trim();
       navigator.clipboard.writeText(text);
-      alert(`"${text}" 복사되었습니다 ✅`);
+
+      btn.classList.add("copied");
+      const originalText = btn.textContent;
+      btn.textContent = "Copied";
+
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.classList.remove("copied");
+      }, 2500);
     }
   </script>
 </body>
